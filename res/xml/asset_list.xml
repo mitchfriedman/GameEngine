@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- <image key="" path="" /> -->
+<!-- <sound key="" path="" /> -->
+<!-- <music key="" path="" /> -->
+<assets>
+    
+    
+    <!-- MENU BUTTONS -->
+    <image key="Buttons/embark-hover" path="Menu/Buttons/embark button hover.png" />
+    <image key="Buttons/embark-active" path="Menu/Buttons/embark button.png"/>
+
+    <image key="grass" path="Tiles/grass.png" />
+    <image key="snow" path="Tiles/snow.png" />
+    <image key="sand" path="Tiles/sand.png" />
+</assets>

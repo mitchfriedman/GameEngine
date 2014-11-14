@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tiles>
+    <tile key="1" image="snow"  />
+    <tile key="2" image="sand"  />
+    <tile key="3" image="grass" />
+</tiles>
