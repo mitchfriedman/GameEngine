@@ -1,0 +1,1 @@
+This is an un-named game engine and can be used by anyone. It’s intended purpose is to be used for android, however framework provided by Kilobolt (http://www.kilobolt.com/game-development-tutorial.html) is very flexible and to port this to another platform simply replace the implementation package with one compatible with that platform.
