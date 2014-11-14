@@ -10,11 +10,6 @@ public class EntityFactory {
 
 	public EntityFactory() {}
 
-	public Entity SpawnEntity(String type) {
-		
-		return null;
-	}
-	
 	public static Entity createButtonEntity(final World world, final String name, final ButtonClickListener listener) {
 			return new EntityManager.EntityBuilder(world.getEntityManager()).createEntity()
 				.withComponent(new Position(world.getGame(), 100,100))

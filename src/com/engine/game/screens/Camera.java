@@ -1,7 +1,6 @@
 package com.engine.game.screens;
 
 import android.graphics.Color;
-import android.util.Log;
 
 import com.engine.components.TileMapComponent;
 import com.engine.framework.Graphics;
@@ -98,7 +97,6 @@ public class Camera {
 			
 			g.drawRect(new Rect(0,0, bounds.width, bounds.height), Color.BLACK);
 		}
-		Log.d("Camera", "scale: " + scale + " bounds: " + bounds.x + "," + bounds.y + "w: "+ bounds.width + " h:" + bounds.height);
 	}
 	
 	public boolean isTouched() {
