@@ -1,19 +1,19 @@
-package com.engine.components;
+package com.engine.game.components;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import android.util.Log;
 
+import com.engine.assets.Assets;
 import com.engine.framework.Graphics;
 import com.engine.framework.Image;
 import com.engine.framework.containers.Vector2d;
 import com.engine.framework.implementation.AndroidGame;
 import com.engine.game.GameEngine;
 import com.engine.game.screens.Camera;
-import com.engine.utilities.Assets;
-import com.engine.utilities.TileMap;
-import com.engine.utilities.TileTemplate;
+import com.engine.maps.TileMap;
+import com.engine.maps.TileTemplate;
 
 public class TileMapComponent extends Component {
 	

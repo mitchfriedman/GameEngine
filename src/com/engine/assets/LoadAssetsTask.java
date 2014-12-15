@@ -1,4 +1,4 @@
-package com.engine.utilities;
+package com.engine.assets;
 
 import android.content.res.XmlResourceParser;
 import android.os.AsyncTask;
@@ -7,6 +7,8 @@ import com.engine.framework.Audio;
 import com.engine.framework.Graphics;
 import com.engine.framework.implementation.AndroidGame;
 import com.engine.game.R;
+import com.engine.maps.TileMap;
+import com.engine.maps.TileTemplate;
 
 import java.io.IOException;
 

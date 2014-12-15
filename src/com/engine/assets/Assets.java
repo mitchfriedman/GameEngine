@@ -1,4 +1,4 @@
-package com.engine.utilities;
+package com.engine.assets;
 
 import java.io.IOException;
 import java.util.HashMap;

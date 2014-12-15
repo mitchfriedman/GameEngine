@@ -2,12 +2,13 @@ package com.engine.game;
 
 import android.os.Bundle;
 
+import com.engine.assets.Assets;
+import com.engine.assets.LoadAssetsTask;
 import com.engine.framework.Screen;
 import com.engine.framework.implementation.AndroidGame;
+import com.engine.game.screens.BaseScreen;
 import com.engine.game.screens.Loading;
 import com.engine.game.screens.World;
-import com.engine.utilities.Assets;
-import com.engine.utilities.LoadAssetsTask;
 
 public class GameEngine extends AndroidGame {
 	

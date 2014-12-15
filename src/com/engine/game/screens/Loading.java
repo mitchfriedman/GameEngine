@@ -1,15 +1,14 @@
 package com.engine.game.screens;
 
+import com.engine.assets.Assets;
 import com.engine.framework.Graphics;
 import com.engine.framework.Image;
-import com.engine.game.BaseScreen;
 import com.engine.game.GameEngine;
-import com.engine.utilities.Assets;
 
 public class Loading extends BaseScreen {
 	
-	private final static double SPLASH_FADE_OUT_TIME = 1500;
-	private final static double SPLASH_FADE_OUT_AT = 1800;
+	private final static double SPLASH_FADE_OUT_TIME = 160;
+	private final static double SPLASH_FADE_OUT_AT = 100;
 	private double elapsedTime = 0;
 	private double opacity = 0;
 	private Image splash;
@@ -36,7 +35,7 @@ public class Loading extends BaseScreen {
 		}
 		
 		if (Assets.isLoaded() && elapsedTime > SPLASH_FADE_OUT_AT + SPLASH_FADE_OUT_TIME) {
-			game.setScreen(new Menu2(game));
+			game.setScreen(new Menu(game));
 		}
 		
 		paint(deltaTime);

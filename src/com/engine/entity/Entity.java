@@ -3,7 +3,7 @@ package com.engine.game;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.engine.components.Component;
+import com.engine.game.components.Component;
 
 public class Entity {
 
@@ -29,7 +29,7 @@ public class Entity {
 	
 	public void onEntityCreation() {
 		for(Component component : components.values()) {
-			component.onObjectCreationCompletion();
+			component.onEntityCreationCompletion();
 		}
 	}
 	

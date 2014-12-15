@@ -1,4 +1,4 @@
-package com.engine.components;
+package com.engine.game.components;
 
 import com.engine.framework.Input;
 import com.engine.framework.containers.Rect;
@@ -29,7 +29,7 @@ public abstract class Component {
 	}
 	
     public void onComponentAdded() {}
-    public void onObjectCreationCompletion() {}
+    public void onEntityCreationCompletion() {}
     public void onPaint(double deltaTime) {}
     public void onUpdate(double deltaTime) {}
     

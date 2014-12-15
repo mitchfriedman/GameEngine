@@ -2,11 +2,11 @@ package com.engine.game.screens;
 
 import android.graphics.Color;
 
-import com.engine.components.TileMapComponent;
 import com.engine.framework.Graphics;
 import com.engine.framework.Input;
 import com.engine.framework.containers.Rect;
 import com.engine.framework.containers.Vector2d;
+import com.engine.game.components.TileMapComponent;
 
 public class Camera {
 	

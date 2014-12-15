@@ -1,7 +1,7 @@
 package com.engine.game.screens;
 
+import com.engine.entity.EntityManager;
 import com.engine.game.GameEngine;
-import com.engine.game.managers.EntityManager;
 
 public class World {
 
@@ -13,7 +13,7 @@ public class World {
 	public World(GameEngine game) {
 		this.game = game;
 		game.setWorld(this);
-		
+	
 	    entityManager = new EntityManager(this);
 	}
 	

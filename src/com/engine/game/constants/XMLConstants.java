@@ -1,4 +1,4 @@
-package com.engine.utilities;
+package com.engine.game.constants;
 
 /**
  * Created by Mitch on 14-11-09.

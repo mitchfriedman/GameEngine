@@ -1,9 +1,10 @@
-package com.engine.utilities;
+package com.engine.maps;
 
 import android.content.res.XmlResourceParser;
 import android.util.Log;
-
 import org.xmlpull.v1.XmlPullParserException;
+
+import com.engine.game.constants.XMLConstants;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -54,10 +55,10 @@ public class TileTemplate {
             } else if(tagName.equals(XMLConstants.TILE)) {
                 int key = Integer.parseInt(xrp.getAttributeValue(null, "key"));
                 String image = xrp.getAttributeValue(null, "image");
-                TileTemplate tile = new TileTemplate(image);
                 tileTemplates.put(key, image);
             }
         }
         Log.d("TileTemplate", tileTemplates.size() + " Tiles Loaded");
     }
 }
+

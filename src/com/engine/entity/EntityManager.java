@@ -1,10 +1,10 @@
-package com.engine.game.managers;
+package com.engine.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.engine.components.Component;
 import com.engine.game.Entity;
+import com.engine.game.components.Component;
 import com.engine.game.screens.World;
 
 public class EntityManager {
@@ -86,7 +86,7 @@ public class EntityManager {
 				entity.addComponent(component);
 			}
 			for(Component component : components) {
-				component.onObjectCreationCompletion();
+				component.onEntityCreationCompletion();
 			}
 			return entity;
 		}

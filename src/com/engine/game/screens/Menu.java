@@ -1,20 +1,25 @@
 package com.engine.game.screens;
 
-import com.engine.game.BaseScreen;
-import com.engine.game.EntityFactory;
+import com.engine.entity.EntityFactory;
 import com.engine.game.GameEngine;
 import com.engine.utilities.ButtonClickListener;
 
-public class Menu2 extends BaseScreen {
+public class Menu extends BaseScreen {
 
 	ButtonClickListener embarkListener  = new ButtonClickListener() {
 		@Override
 		public void onUp() {
 			game.setScreenClearEntities(new Level(game));
 		}
+
+		@Override
+		public void onDown() {}
+
+		@Override
+		public void onCancel() {}
 	};
 	
-	public Menu2(GameEngine game) {
+	public Menu(GameEngine game) {
 		super(game);
 		createButtons();
 	}

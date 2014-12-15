@@ -1,9 +1,9 @@
-package com.engine.components;
+package com.engine.game.components;
 
+import com.engine.assets.Assets;
 import com.engine.framework.Graphics;
 import com.engine.framework.Image;
 import com.engine.game.GameEngine;
-import com.engine.utilities.Assets;
 
 public class StaticImage extends Component {
 	
@@ -49,7 +49,7 @@ public class StaticImage extends Component {
     }
     
     @Override
-    public void onObjectCreationCompletion() {
+    public void onEntityCreationCompletion() {
     	try {
     		position = getEntity().getComponent(Position.class);
     		position.setSize(image.getWidth(), image.getHeight());

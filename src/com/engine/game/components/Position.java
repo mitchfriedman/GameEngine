@@ -1,4 +1,4 @@
-package com.engine.components;
+package com.engine.game.components;
 
 import com.engine.framework.containers.Rect;
 import com.engine.framework.containers.Vector2d;

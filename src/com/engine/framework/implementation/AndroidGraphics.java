@@ -20,14 +20,13 @@ import com.engine.framework.containers.Vector2d;
 
 public class AndroidGraphics implements Graphics {
 	
-    AssetManager assets;
-    Bitmap frameBuffer;
-    Canvas canvas;
-    Paint paint;
-    Matrix matrix = new Matrix();
+    private AssetManager assets;
+    private Bitmap frameBuffer;
+    private Canvas canvas;
+    private Paint paint;
+    private Matrix matrix = new Matrix();
     
-    public AndroidGraphics(AssetManager assets, Bitmap frameBuffer) 
-    {
+    public AndroidGraphics(AssetManager assets, Bitmap frameBuffer) {
         this.assets = assets;
         this.frameBuffer = frameBuffer;
         this.canvas = new Canvas(frameBuffer);
@@ -35,8 +34,7 @@ public class AndroidGraphics implements Graphics {
     }
     
     @Override
-    public Image newImage(String fileName, ImageFormat format) 
-    {
+    public Image newImage(String fileName, ImageFormat format) {
         Config config = null;
         if (format == ImageFormat.RGB565)
             config = Config.RGB_565;
@@ -93,13 +91,11 @@ public class AndroidGraphics implements Graphics {
     }
 
     @Override
-    public void drawRect(int x, int y, int width, int height, int color) 
-    {
+    public void drawRect(int x, int y, int width, int height, int color) {
         drawRect(new Rect(x,y,width,height), color);
     }
     
-    public void drawRect(Rect rect, int color)
-    {
+    public void drawRect(Rect rect, int color) {
     	rect.scaleValues(AndroidGame.SCALE);
     	paint.setColor(color);
     	paint.setStyle(Style.FILL);
@@ -118,12 +114,8 @@ public class AndroidGraphics implements Graphics {
     }
     
     @Override
-    public void drawImage(Image image, Vector2d pos, Rect src, boolean reverseX, boolean reverseY) 
-    {
+    public void drawImage(Image image, Vector2d pos, Rect src, boolean reverseX, boolean reverseY) {
     	matrix.reset();
-    	// translates and scales to src position and size
-    	//matrix.setTranslate(  (float) src.x, (float) src.y );
-    	//matrix.setScale(      (float) (src.getWidth() / image.getWidth()), (float) (src.getHeight() / image.getHeight()) );
     	
     	Rect dest = new Rect(0,0,0,0);
     	dest.x = (pos.x + (reverseX ? src.getWidth()  : 0)) * AndroidGame.SCALE;
@@ -142,14 +134,11 @@ public class AndroidGraphics implements Graphics {
     @Override
     public void drawImage(Image image, Vector2d pos, boolean reverseX, boolean reverseY, float scale) {
     	matrix.reset();
-    	// translates and scales to src position and size
-    	//matrix.setTranslate(  (float) src.x, (float) src.y );
-    	//matrix.setScale(      (float) (src.getWidth() / image.getWidth()), (float) (src.getHeight() / image.getHeight()) );
     	
     	Rect dest = new Rect(0,0,0,0);
-    	dest.x = pos.x * scale;//(pos.x + (reverseX ? src.getWidth()  : 0)) * AndroidGame.SCALE;
-    	dest.y = pos.y * scale;//(pos.y + (reverseY ? src.getHeight() : 0)) * AndroidGame.SCALE;
-    	dest.width  = scale; // We're mathing the scale here, not actual pixel size.
+    	dest.x = (pos.x + (reverseX ? image.getWidth()  : 0)) * scale;
+    	dest.y = (pos.y + (reverseY ? image.getHeight() : 0)) * scale;
+    	dest.width  = scale; // We're matching the scale here, not actual pixel size.
     	dest.height = scale;
     	
     	// translates and scales to position on screen. Scales automatically to game scale size. Scales from center of image.
@@ -161,34 +150,28 @@ public class AndroidGraphics implements Graphics {
     }
     
     @Override
-    public void drawImage(Image image, Vector2d pos, boolean reverseX,
-    		boolean reverseY) 
-    {
+    public void drawImage(Image image, Vector2d pos, boolean reverseX, boolean reverseY) {
     	Rect src = new Rect(0,0, image.getWidth(), image.getHeight());
     	drawImage(image, pos, src, reverseX, reverseY);    	
     }
     
     @Override
-    public void drawImage(Image image, Vector2d pos, Rect src) 
-    {
+    public void drawImage(Image image, Vector2d pos, Rect src) {
     	drawImage(image, pos, src, false, false);
     }
     
     @Override
-    public void drawImage(Image image, int x, int y, Rect src) 
-    {
+    public void drawImage(Image image, int x, int y, Rect src) {
     	drawImage(image, new Vector2d(x,y), src);
     }
     
     @Override
-    public void drawImage(Image image, Vector2d pos) 
-    {
+    public void drawImage(Image image, Vector2d pos) {
     	drawImage(image, pos, false, false);
     }
     
     @Override
-    public void drawImage(Image image, double x, double y) 
-    {
+    public void drawImage(Image image, double x, double y) {
     	drawImage(image, new Vector2d(x, y));
     }
 
@@ -200,13 +183,12 @@ public class AndroidGraphics implements Graphics {
         return (int)Math.ceil(frameBuffer.getHeight() / AndroidGame.SCALE);
     }
 
-    public Vector2d getSize()
-    {
+    public Vector2d getSize() {
     	return new Vector2d(getWidth(), getHeight());
     }
     
-    public Canvas getCanvas() 
-    {
+    public Canvas getCanvas() {
     	return canvas;
     }
 }
+

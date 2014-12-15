@@ -32,13 +32,13 @@ public abstract class AndroidGame extends Activity implements Game {
     public static final int SCREEN_HEIGHT = 800;
 	
     public AndroidFastRenderView renderView;
-    Graphics graphics;
-    Audio audio;
-    Input input;
-    FileIO fileIO;
-    Screen screen;
-    WakeLock wakeLock;
-    Vector2d screenSize;
+    protected Graphics graphics;
+    protected Audio audio;
+    protected Input input;
+    protected FileIO fileIO;
+    protected Screen screen;
+    protected WakeLock wakeLock;
+    protected Vector2d screenSize;
 	
     @SuppressWarnings("deprecation")
 	@Override

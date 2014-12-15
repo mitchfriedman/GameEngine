@@ -1,9 +1,9 @@
-package com.engine.components;
+package com.engine.game.components;
 
+import com.engine.assets.Assets;
 import com.engine.framework.Graphics;
 import com.engine.framework.Image;
 import com.engine.game.GameEngine;
-import com.engine.utilities.Assets;
 import com.engine.utilities.ButtonClickListener;
 
 public class Button extends Component {
@@ -12,10 +12,9 @@ public class Button extends Component {
 	
 	private Position position;
 
-	boolean lastTouched = false;
-	boolean lastScreenTouched = false;
-	boolean wasCanceled = false;
-	boolean down = false;
+	private boolean lastTouched = false;
+	private boolean lastScreenTouched = false;
+	private boolean wasCanceled = false;
 
 	private Image toggledImage;
 	private Image pressedImage;
@@ -65,7 +64,6 @@ public class Button extends Component {
 			listener.onDown();
 			onDown();
 			
-			down = true;
 			lastTouched = true;
 		}
 		else if (lastTouched && !touched && screenTouched) {
@@ -73,14 +71,12 @@ public class Button extends Component {
 			onCancel();
 			
 			wasCanceled = true;
-			down = false;
 			lastTouched = false;
 		}
 		else if (lastTouched && !touched) {
 			listener.onUp();
 			onUp();
 			
-			down = false;
 			lastTouched = false;
 		}
 		
@@ -111,7 +107,7 @@ public class Button extends Component {
 	}
 	
 	@Override
-	public void onObjectCreationCompletion() {
+	public void onEntityCreationCompletion() {
 		try {
 			position = getEntity().getComponent(Position.class);
 			position.setSize(currentImage.getWidth(), currentImage.getHeight());

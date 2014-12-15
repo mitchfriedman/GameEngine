@@ -1,7 +1,7 @@
-package com.engine.game;
+package com.engine.game.screens;
 
 import com.engine.framework.Screen;
-import com.engine.game.screens.World;
+import com.engine.game.GameEngine;
 
 public abstract class BaseScreen extends Screen {
 
