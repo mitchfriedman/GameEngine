@@ -2,6 +2,8 @@ package com.engine.framework.containers;
 
 import java.util.List;
 
+import com.engine.framework.containers.Vector2d;
+
 public class MathHelper {
 	
 	private MathHelper() {}
@@ -83,8 +85,12 @@ public class MathHelper {
 				return i;
 			}
 		}
-		// Will never happen ... like that girlfriend ):
 		return 0;
+	}
+
+	public static double distanceBetweenVectors(Vector2d vector1, Vector2d vector2) {
+		return Math.sqrt((vector2.x - vector1.x) * (vector2.x - vector1.x) 
+				 + (vector2.y - vector1.y) * (vector2.y - vector1.y));
 	}
 	
 }

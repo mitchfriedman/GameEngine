@@ -20,6 +20,23 @@ This is where most of the important stuff happens such as creating/destroying en
 
 The `screen` is what is currently being rendered, and the `screen` child class that is being used should keep track of switching `screen`s.  To make things simple, everything is rendered to the `screen` directly. `Screen`s don’t keep track of entities that are on them, and if you don’t remove entities on switching screens they will persist (as the `EntityManager` class acts as a singleton and is only created once, not on each screen).  
 
+# Improvements
+
+There is a few things I can see that would be useful in the near future:
+
+* An event system, specifically for switching screens and notifying entities to be destroyed/created
+* The combination of World and GameEngine into the same class, and abstract the Android specific code in Game to be a part of something in Framework (maybe move it to AndroidGame)
+* Google play integration for leaderboards and achievements
+* More efficient methods of scaling images dynamically (for rendering, not changing image file dimensions)
+* Multiple map supports (currently, only tiled-maps are supported)
+* OpenGL instead of canvas for more flexibility
+* A tool for developing UI for menus/end screens
+* more that I am currently forgetting
 
 
+### About the demo
+
+When running the game right after cloning, you will see a moon fade in, then a button to embark.  The moon is the loading screen, and the embark is a simple menu.  The tiles is the actual game, and the camera supports panning and zooming.  
+
+Happy coding :)
 

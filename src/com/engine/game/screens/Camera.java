@@ -7,48 +7,55 @@ import com.engine.framework.Input;
 import com.engine.framework.containers.Rect;
 import com.engine.framework.containers.Vector2d;
 import com.engine.game.components.TileMapComponent;
+import com.engine.framework.containers.MathHelper;
+import com.engine.game.screens.World;
 
 public class Camera {
 	
-	private int mapWidth;
-	private int mapHeight;
+	private static final float DEFAULT_SCALE = 1.0f;
+	
+	private static final double SCALE_FACTOR = 0.0005f;
+	
+	private int mapWidth = TileMapComponent.MAP_WIDTH;
+	private int mapHeight = TileMapComponent.MAP_HEIGHT;
 	
 	private int viewWidth;
 	private int viewHeight;
 	
-	private Rect bounds;
-	
-	private boolean lastTouched;
-	private Vector2d lastTouchPos;
-	
-	
-	private boolean lastScaled;
-	private Vector2d lastTouch1;
-	private Vector2d lastTouch2;
-	
-	
-	private Input input;
-	private Graphics g;
-	
 	private float scale;
 	
+	private Rect bounds;
+	
+	int deltaX = 1, deltaY = 1;
+	
+	//general (single touch & multi-touch)
+	private boolean lastTouched;
+	private boolean lastScaled;
+	
 	private boolean hasChanged;
+	
+	//single touch vector
+	private Vector2d lastTouchPos;
+	
+	//multi touch handling vectors
+	private Vector2d lastTouchMulti1;
+	private Vector2d lastTouchMulti2;
+	
+	private Input input;
+	private Graphics graphics;
 	
 	public Camera(World world) {
 		world.setCamera(this);
 		input = world.getGame().getInput();
-		g = world.getGame().getGraphics();
+		graphics = world.getGame().getGraphics();
 		
+		scale = DEFAULT_SCALE;
 		viewWidth = world.getGame().getGraphics().getWidth();
 		viewHeight = world.getGame().getGraphics().getHeight();
-		
-		mapWidth = TileMapComponent.MAP_WIDTH;
-		mapHeight = TileMapComponent.MAP_HEIGHT;
 		
 		hasChanged = true;
 		
 		initializeOffset();
-		scale = 1.0f;
 	}
 	
 	private void initializeOffset() {
@@ -73,7 +80,8 @@ public class Camera {
 			lastScaled = false;
 			lastTouched = false;
 			hasChanged = false;
-		} else if(touched && !secondTouch){
+		} else if(touched && !secondTouch) {
+			//handle single touch
 			Vector2d touchPos = new Vector2d(input.getTouchX(0), input.getTouchY(0));
 			if(lastTouched) {
 				calculateOffset(touchPos.subtract(lastTouchPos));
@@ -83,6 +91,7 @@ public class Camera {
 			lastTouched = true;
 			hasChanged = true;
 		} else if(touched && secondTouch) {
+			//handle double-touch
 			Vector2d touchPos1 = new Vector2d(input.getTouchX(0), input.getTouchY(0));
 			Vector2d touchPos2 = new Vector2d(input.getTouchX(1), input.getTouchY(1));
 			
@@ -90,12 +99,12 @@ public class Camera {
 				calculateScale(touchPos1, touchPos2);
 			}
 			
-			lastTouch1 = touchPos1;
-			lastTouch2 = touchPos2;
+			lastTouchMulti1 = touchPos1;
+			lastTouchMulti2 = touchPos2;
 			lastScaled = true;
 			hasChanged = true;
 			
-			g.drawRect(new Rect(0,0, bounds.width, bounds.height), Color.BLACK);
+			graphics.drawRect(new Rect(0,0, bounds.width, bounds.height), Color.BLACK);
 		}
 	}
 	
@@ -105,22 +114,6 @@ public class Camera {
 	
 	public Vector2d getTouchPosWorldCordinates() {
 		return lastTouchPos.add(new Vector2d(bounds.x, bounds.y));
-	}
-	
-	private void calculateScale(Vector2d touch1, Vector2d touch2) {
-		double distance1 = Math.sqrt((touch1.x - touch2.x) * (touch1.x - touch2.x) 
- 				+ (touch1.y - touch2.y) * (touch1.y - touch2.y));
-		
-		double distance2 = Math.sqrt((lastTouch2.x - lastTouch1.x) * (lastTouch2.x - lastTouch1.x) 
-						 + (lastTouch2.y - lastTouch1.y) * (lastTouch2.y - lastTouch1.y));
-		
-		double delta = distance1 - distance2;
-		
-		if(distance1 < distance2 && scale < 1.5) {
-			scale -= delta * 0.0005;
-		} else if(distance1 > distance2 && scale > 0.5) {
-			scale += -delta * 0.0005;
-		}
 	}
 	
 	public float getScale() {
@@ -135,17 +128,31 @@ public class Camera {
 		return hasChanged;
 	}
 	
+	private void calculateScale(Vector2d touch1, Vector2d touch2) {
+		double distance1 = MathHelper.distanceBetweenVectors(touch1, touch2);
+		double distance2 = MathHelper.distanceBetweenVectors(lastTouchMulti1, lastTouchMulti2);
+		
+		double delta = distance1 - distance2;
+		
+		if(distance1 < distance2 && scale < 1.5) {
+			scale += delta * SCALE_FACTOR;
+		} else if(distance1 > distance2 && scale > 0.5) {
+			scale -= -delta * SCALE_FACTOR;
+		}
+	}
+	
 	private void calculateOffset(Vector2d delta) {
 		
-		bounds.x += delta.x;
-		bounds.y += delta.y;
+		bounds.x -= delta.x;
+		bounds.y -= delta.y;
 		
 		if(bounds.x < 0) bounds.x = 0;
 		else if(bounds.x + bounds.width > mapWidth) bounds.x = mapWidth - bounds.width;
 		if(bounds.y < 0) bounds.y = 0;
 		else if(bounds.y + bounds.height > mapHeight) bounds.y = mapHeight - bounds.height;
 		
-		g.drawRect(new Rect(0,0, bounds.width, bounds.height), Color.BLACK);
+		//TODO: remove?
+		graphics.drawRect(new Rect(0,0, bounds.width, bounds.height), Color.BLACK);
 		
 	}
 }
